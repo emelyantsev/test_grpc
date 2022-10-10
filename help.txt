@@ -1,0 +1,17 @@
+
+----- Собрать всё вручную ------------------
+
+g++ -I/home/aleksey/.local/include --std=c++14 -c src/generated/geo.pb.cc -pthread
+g++ -I/home/aleksey/.local/include --std=c++14 -c src/generated/geo.grpc.pb.cc -pthread
+g++ -I/home/aleksey/.local/include --std=c++14 -c src/sync_server.cpp -pthread
+g++ -I/home/aleksey/.local/include --std=c++14 -c src/run_sync_server.cpp -pthread
+
+g++ geo.pb.o geo.grpc.pb.o sync_server.o run_sync_server.o -o run_sync_server /home/aleksey/.local/lib/libgrpc++_reflection.a /home/aleksey/.local/lib/libgrpc++.a /home/aleksey/.local/lib/libprotobuf.a /home/aleksey/.local/lib/libgrpc.a /home/aleksey/.local/lib/libz.a /home/aleksey/.local/lib/libcares.a /home/aleksey/.local/lib/libaddress_sorting.a /home/aleksey/.local/lib/libre2.a /home/aleksey/.local/lib/libupb.a /home/aleksey/.local/lib/libabsl_raw_hash_set.a /home/aleksey/.local/lib/libabsl_hashtablez_sampler.a /home/aleksey/.local/lib/libabsl_hash.a /home/aleksey/.local/lib/libabsl_city.a /home/aleksey/.local/lib/libabsl_low_level_hash.a /home/aleksey/.local/lib/libabsl_statusor.a /home/aleksey/.local/lib/libabsl_bad_variant_access.a /home/aleksey/.local/lib/libgpr.a -ldl -lm -lrt /home/aleksey/.local/lib/libabsl_status.a /home/aleksey/.local/lib/libabsl_strerror.a /home/aleksey/.local/lib/libabsl_random_distributions.a /home/aleksey/.local/lib/libabsl_random_seed_sequences.a /home/aleksey/.local/lib/libabsl_random_internal_pool_urbg.a /home/aleksey/.local/lib/libabsl_random_internal_randen.a /home/aleksey/.local/lib/libabsl_random_internal_randen_hwaes.a /home/aleksey/.local/lib/libabsl_random_internal_randen_hwaes_impl.a /home/aleksey/.local/lib/libabsl_random_internal_randen_slow.a /home/aleksey/.local/lib/libabsl_random_internal_platform.a /home/aleksey/.local/lib/libabsl_random_internal_seed_material.a /home/aleksey/.local/lib/libabsl_random_seed_gen_exception.a /home/aleksey/.local/lib/libabsl_cord.a /home/aleksey/.local/lib/libabsl_bad_optional_access.a /home/aleksey/.local/lib/libabsl_cordz_info.a /home/aleksey/.local/lib/libabsl_cord_internal.a /home/aleksey/.local/lib/libabsl_cordz_functions.a /home/aleksey/.local/lib/libabsl_exponential_biased.a /home/aleksey/.local/lib/libabsl_cordz_handle.a /home/aleksey/.local/lib/libabsl_str_format_internal.a /home/aleksey/.local/lib/libabsl_synchronization.a /home/aleksey/.local/lib/libabsl_stacktrace.a /home/aleksey/.local/lib/libabsl_symbolize.a /home/aleksey/.local/lib/libabsl_debugging_internal.a /home/aleksey/.local/lib/libabsl_demangle_internal.a /home/aleksey/.local/lib/libabsl_graphcycles_internal.a /home/aleksey/.local/lib/libabsl_malloc_internal.a /home/aleksey/.local/lib/libabsl_time.a /home/aleksey/.local/lib/libabsl_strings.a /home/aleksey/.local/lib/libabsl_throw_delegate.a /home/aleksey/.local/lib/libabsl_int128.a /home/aleksey/.local/lib/libabsl_strings_internal.a /home/aleksey/.local/lib/libabsl_base.a -lpthread /home/aleksey/.local/lib/libabsl_spinlock_wait.a -lrt /home/aleksey/.local/lib/libabsl_raw_logging_internal.a /home/aleksey/.local/lib/libabsl_log_severity.a /home/aleksey/.local/lib/libabsl_civil_time.a /home/aleksey/.local/lib/libabsl_time_zone.a /home/aleksey/.local/lib/libssl.a /home/aleksey/.local/lib/libcrypto.a -lpthread -pthread 
+
+
+-----------------------------------------------------------
+
+export MY_INSTALL_DIR=$HOME/.local
+export PATH="$MY_INSTALL_DIR/bin:$PATH"
+
+cmake -DgRPC_INSTALL=ON -DgRPC_BUILD_TESTS=OFF -DCMAKE_INSTALL_PREFIX=$MY_INSTALL_DIR ../..

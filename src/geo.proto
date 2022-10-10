@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package Geo;
+
+message Point {
+    int32 latitude = 1;
+    int32 longitude = 2;
+}
+
+message CityName {
+    string name = 1;
+}
+
+message CityInfo {
+    Point location = 1;
+    string name = 2;
+}
+
+enum Status {
+
+    STATUS_OK = 0;
+    STATUS_ERROR = 1;
+}
+
+message StatusResponse {
+    Status status = 1;
+}
+
+message Void {}
+
+service GeoManager {
+
+    rpc AddCity(CityInfo) returns (StatusResponse) {}
+
+    rpc RemoveCity(CityInfo) returns (StatusResponse) {}
+
+    rpc AddCities(stream CityInfo) returns (stream StatusResponse) {}
+
+    rpc RemoveCities(stream CityInfo) returns (stream StatusResponse) {}
+
+    rpc GetCityByName(CityName) returns (stream Point) {}
+
+    rpc GetCityByCoords(Point) returns (CityName) {}
+
+    rpc GetCities(Void) returns (stream CityInfo) {}
+}
