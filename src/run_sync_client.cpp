@@ -3,9 +3,22 @@
 #include <string>
 #include <sstream>
 
-int main() {
+int main(int argc, char* argv[] ) {
 
-    std::string target_str = "localhost:50051" ;
+    std::string addressStr = "localhost";
+    std::string portStr = "50051";
+
+    if (argc > 1) {
+
+        addressStr = argv[1] ;
+    }
+
+    if (argc > 2) {
+
+        portStr = argv[2] ;
+    }
+
+    std::string target_str = addressStr + ":" + portStr; 
 
     GeoClient client( ::grpc::CreateChannel(target_str, grpc::InsecureChannelCredentials() ) ) ;
 

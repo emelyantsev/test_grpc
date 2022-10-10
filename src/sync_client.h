@@ -6,8 +6,8 @@
 
 #include <grpcpp/grpcpp.h>
 
-#include "generated/geo.pb.h"
-#include "generated/geo.grpc.pb.h"
+#include "geo.pb.h"
+#include "geo.grpc.pb.h"
 
 
 #include "common.h"

@@ -1,8 +1,8 @@
 
 ----- Собрать всё вручную ------------------
 
-g++ -I/home/aleksey/.local/include --std=c++14 -c src/generated/geo.pb.cc -pthread
-g++ -I/home/aleksey/.local/include --std=c++14 -c src/generated/geo.grpc.pb.cc -pthread
+g++ -I/home/aleksey/.local/include --std=c++14 -c src/geo.pb.cc -pthread
+g++ -I/home/aleksey/.local/include --std=c++14 -c src/geo.grpc.pb.cc -pthread
 g++ -I/home/aleksey/.local/include --std=c++14 -c src/sync_server.cpp -pthread
 g++ -I/home/aleksey/.local/include --std=c++14 -c src/run_sync_server.cpp -pthread
 

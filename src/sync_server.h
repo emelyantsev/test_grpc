@@ -4,8 +4,8 @@
 #include <grpcpp/ext/proto_server_reflection_plugin.h>
 #include <grpcpp/health_check_service_interface.h>
 
-#include "generated/geo.pb.h"
-#include "generated/geo.grpc.pb.h"
+#include "geo.pb.h"
+#include "geo.grpc.pb.h"
 
 #include <vector>
 #include <unordered_map>

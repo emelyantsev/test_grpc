@@ -3,28 +3,11 @@
 #include <iostream>
 #include <string>
 #include <memory>
-#include <csignal>
-#include <thread>
 
 
-// grpc::Server* ptr_server = nullptr;
-
-// void signal_handler(int signal) {
-
-
-//   std::cout << "Handle signal" << std::endl;
-
-//   if (ptr_server != nullptr) {
-
-//     std::thread t( &grpc::ServerInterface::Shutdown, ptr_server );
-//   }
-// }
-
-
-
-void RunServer() {
+void RunServer(const std::string& address, const std::string& port) {
   
-  std::string server_address("0.0.0.0:50051");
+  std::string server_address = address + ":" + port;
   
   GeoManagerImpl service;
 
@@ -37,22 +20,28 @@ void RunServer() {
 
   std::unique_ptr<grpc::Server> server(builder.BuildAndStart());
   
-  //ptr_server = server.get();
-  //std::signal(SIGINT, signal_handler) ;
-
   std::cout << "Server listening on " << server_address << std::endl;
   
   server->Wait();
 
-
-  std::cout << "Graceful shutdown after sigint" << std::endl;
 }
 
-int main() {
+int main(int argc, char* argv[]) {
 
+    std::string addressStr = "0.0.0.0";
+    std::string portStr = "50051";
 
-    RunServer();
+    if (argc > 1) {
 
+        addressStr = argv[1] ;
+    }
+
+    if (argc > 2) {
+
+        portStr = argv[2] ;
+    }
+
+    RunServer(addressStr, portStr);
 
     return 0;
 }
