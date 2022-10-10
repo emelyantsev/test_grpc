@@ -22,3 +22,8 @@ cmake -DgRPC_INSTALL=ON -DgRPC_BUILD_TESTS=OFF -DCMAKE_INSTALL_PREFIX=$MY_INSTAL
 docker build -t grpc-sync-server-img .
 
 docker run -p 50051:50051 --name grpc-sync-server-container grpc-sync-server-img
+
+
+-------------------------------
+
+python -m grpc_tools.protoc -I src --python_out=src_py --grpc_python_out=src_py geo.proto

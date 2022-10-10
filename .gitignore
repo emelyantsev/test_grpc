@@ -1,3 +1,9 @@
 cmake/*
 *pb.cc
 *pb.h
+env
+
+
+__pycache__
+*pb2.py
+*pb2_grpc.py
