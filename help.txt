@@ -15,3 +15,10 @@ export MY_INSTALL_DIR=$HOME/.local
 export PATH="$MY_INSTALL_DIR/bin:$PATH"
 
 cmake -DgRPC_INSTALL=ON -DgRPC_BUILD_TESTS=OFF -DCMAKE_INSTALL_PREFIX=$MY_INSTALL_DIR ../..
+
+
+------------------------------------------------------------
+
+docker build -t grpc-sync-server-img .
+
+docker run -p 50051:50051 --name grpc-sync-server-container 00b6ea04d127
