@@ -21,4 +21,4 @@ cmake -DgRPC_INSTALL=ON -DgRPC_BUILD_TESTS=OFF -DCMAKE_INSTALL_PREFIX=$MY_INSTAL
 
 docker build -t grpc-sync-server-img .
 
-docker run -p 50051:50051 --name grpc-sync-server-container 00b6ea04d127
+docker run -p 50051:50051 --name grpc-sync-server-container grpc-sync-server-img
