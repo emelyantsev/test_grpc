@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package Calc;
+
+message NumbersRequest {
+    int32 x = 1;
+    int32 y = 2;
+}
+
+message NumbersResponse {
+    int32 value = 1;
+}
+
+message NumberRequest {
+    int32 value = 1;
+}
+
+service Calculator {
+
+    rpc AddNumbers(NumbersRequest) returns (NumbersResponse) {}
+    rpc MultiplyNumbers(NumbersRequest) returns (NumbersResponse) {}
+    rpc SumNumbers(stream NumberRequest) returns (NumbersResponse) {}
+}

@@ -46,3 +46,50 @@ target_link_libraries(run_sync_server hw_grpc_proto ${_REFLECTION} ${_GRPC_GRPCP
 
 add_executable(run_sync_client src/run_sync_client.cpp src/sync_client.cpp src/common.cpp)
 target_link_libraries(run_sync_client hw_grpc_proto ${_REFLECTION} ${_GRPC_GRPCPP} ${_PROTOBUF_LIBPROTOBUF} )
+
+
+# build async versions
+
+
+# Proto file
+get_filename_component(hw_proto "src_async/calculator.proto" ABSOLUTE)
+get_filename_component(hw_proto_path "${hw_proto}" PATH)
+
+# Generated sources
+set(hw_proto_srcs "${CMAKE_CURRENT_BINARY_DIR}/calculator.pb.cc")
+set(hw_proto_hdrs "${CMAKE_CURRENT_BINARY_DIR}/calculator.pb.h")
+set(hw_grpc_srcs "${CMAKE_CURRENT_BINARY_DIR}/calculator.grpc.pb.cc")
+set(hw_grpc_hdrs "${CMAKE_CURRENT_BINARY_DIR}/calculator.grpc.pb.h")
+
+add_custom_command(
+      OUTPUT "${hw_proto_srcs}" "${hw_proto_hdrs}" "${hw_grpc_srcs}" "${hw_grpc_hdrs}"
+      COMMAND ${_PROTOBUF_PROTOC}
+      ARGS --grpc_out "${CMAKE_CURRENT_BINARY_DIR}"
+        --cpp_out "${CMAKE_CURRENT_BINARY_DIR}"
+        -I "${hw_proto_path}"
+        --plugin=protoc-gen-grpc="${_GRPC_CPP_PLUGIN_EXECUTABLE}"
+        "${hw_proto}"
+      DEPENDS "${hw_proto}")
+
+# Include generated *.pb.h files
+include_directories("${CMAKE_CURRENT_BINARY_DIR}")
+
+# hw_grpc_proto
+add_library(hw_grpc_proto2
+  ${hw_grpc_srcs}
+  ${hw_grpc_hdrs}
+  ${hw_proto_srcs}
+  ${hw_proto_hdrs})
+
+  target_link_libraries(hw_grpc_proto2
+  ${_REFLECTION}
+  ${_GRPC_GRPCPP}
+  ${_PROTOBUF_LIBPROTOBUF})
+
+
+add_executable(run_async_server src_async/run_async_server.cpp src_async/async_server.cpp)
+target_link_libraries(run_async_server hw_grpc_proto2 ${_REFLECTION} ${_GRPC_GRPCPP} ${_PROTOBUF_LIBPROTOBUF} )
+
+
+add_executable(run_async_client src_async/run_async_client.cpp src_async/async_client.cpp src/common.cpp)
+target_link_libraries(run_async_client hw_grpc_proto2 ${_REFLECTION} ${_GRPC_GRPCPP} ${_PROTOBUF_LIBPROTOBUF} )
