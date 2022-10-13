@@ -43,7 +43,7 @@ ServerImpl::~ServerImpl() {
     server_->Shutdown();
     cq_->Shutdown();
 
-    std::cout << "ServerImpl destructed" << std::endl;
+    // std::cout << "ServerImpl destructed" << std::endl;
 }
 
 
@@ -52,7 +52,7 @@ ServerImpl::CallData::CallData(::Calc::Calculator::AsyncService* service, ::grpc
 
 ServerImpl::CallData::~CallData() {
 
-    std::cout << "CallData destructed" << std::endl;
+    // std::cout << "CallData destructed" << std::endl;
 }
 
 ServerImpl::AddCallData::AddCallData(::Calc::Calculator::AsyncService* service, ::grpc::ServerCompletionQueue* cq) : CallData(service, cq), responder_(&ctx_){
@@ -85,7 +85,7 @@ void ServerImpl::AddCallData::Proceed(bool ok) {
 
 ServerImpl::AddCallData::~AddCallData() {
 
-    std::cout << "AddCalldata destructed" << std::endl;
+    // std::cout << "AddCalldata destructed" << std::endl;
 }
 
 ServerImpl::MultiplyCallData::MultiplyCallData(::Calc::Calculator::AsyncService* service, ::grpc::ServerCompletionQueue* cq) : CallData(service, cq), responder_(&ctx_) {
@@ -117,7 +117,7 @@ void ServerImpl::MultiplyCallData::Proceed(bool ok) {
 
 ServerImpl::MultiplyCallData::~MultiplyCallData() {
 
-    std::cout << "MultiplyCallData destructed" << std::endl;
+    // std::cout << "MultiplyCallData destructed" << std::endl;
 }
 
 
@@ -168,5 +168,5 @@ void ServerImpl::SumCallData::Proceed(bool ok) {
 
 ServerImpl::SumCallData::~SumCallData() {
 
-    std::cout << "SumCallData destructed" << std::endl;
+    // std::cout << "SumCallData destructed" << std::endl;
 }
